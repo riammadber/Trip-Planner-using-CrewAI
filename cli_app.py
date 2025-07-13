@@ -6,6 +6,7 @@ import argparse
 from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
 import os
+from dotenv import load_dotenv
 
 
 class TripCrew:

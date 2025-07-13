@@ -45,9 +45,13 @@ class BrowserTools(BaseTool):
                 )
                 task = Task(
                     description=f'Analyze and summarize the content below, make sure to include the most relevant information in the summary, return only the summary nothing else.\n\nCONTENT\n----------\n{chunk}',
+                    expected_output="A concise summary of the content highlighting the most relevant information",
                     agent=agent
                 )
-                summary = task.execute()
+                from crewai import Crew
+                crew = Crew(agents=[agent], tasks=[task])
+                result = crew.kickoff()
+                summary = result.raw if hasattr(result, 'raw') else str(result)
                 summaries.append(summary)
             return "\n\n".join(summaries)
         except Exception as e:

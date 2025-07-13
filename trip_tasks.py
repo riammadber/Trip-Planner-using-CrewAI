@@ -5,8 +5,14 @@ import streamlit as st
 
 class TripTasks():
     def __validate_inputs(self, origin, cities, interests, date_range):
-        if not origin or not cities or not interests or not date_range:
-            raise ValueError("All input parameters must be provided")
+        if not origin or not isinstance(origin, str) or not origin.strip():
+            raise ValueError("Origin must be a non-empty string")
+        if not cities or not isinstance(cities, str) or not cities.strip():
+            raise ValueError("Cities must be a non-empty string")
+        if not interests or not isinstance(interests, str) or not interests.strip():
+            raise ValueError("Interests must be a non-empty string")
+        if not date_range or not isinstance(date_range, str) or not date_range.strip():
+            raise ValueError("Date range must be a non-empty string")
         return True
 
     def identify_task(self, agent, origin, cities, interests, range):
@@ -78,7 +84,7 @@ class TripTasks():
             anticipated weather conditions, recommended clothing and
             items to pack, and a detailed budget, ensuring THE BEST
             TRIP EVER, Be specific and give it a reason why you picked
-            # up each place, what make them special! {self.__tip_section()}
+            up each place, what make them special! {self.__tip_section()}
 
             Trip Date: {range}
             Traveling from: {origin}

@@ -77,8 +77,8 @@ def validate_api_keys(settings: Settings = Depends(get_settings)):
     return settings
 
 class TripCrew:
-    def __init__(self, origin, destination, date_range, interests):
-        self.destination = destination
+    def __init__(self, origin, cities, date_range, interests):
+        self.cities = cities
         self.origin = origin
         self.interests = interests
         self.date_range = date_range
@@ -96,7 +96,7 @@ class TripCrew:
             identify_task = tasks.identify_task(
                 city_selector_agent,
                 self.origin,
-                self.destination,
+                self.cities,
                 self.interests,
                 self.date_range
             )
